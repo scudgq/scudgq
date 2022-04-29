@@ -1,0 +1,26 @@
+import pyautogui
+from datetime import  datetime
+import time
+
+
+pyautogui.PAUSE=0.1
+pyautogui.FAILSAFE= True
+start_time = datetime.strptime(str('2022-04-29 16:30:00.000000'),'%Y-%m-%d %H:%M:%S.%f')
+end_time = datetime.strptime(str('2022-04-29 16:30:10.000000'),'%Y-%m-%d %H:%M:%S.%f')
+coords = pyautogui.locateOnScreen('img.png')
+while True:
+    coords = pyautogui.locateOnScreen('img.png',confidence=0.8)
+    nt = datetime.now()
+    if coords is not None:
+        print(nt)
+        print('找到了')
+        if nt>= start_time and nt< end_time:
+            x, y = pyautogui.center(coords)
+            pyautogui.leftClick(x,y)
+        if nt>= end_time:
+            break
+        else:
+            print('时间没到')
+    else:
+        print('没找到')
+        print(nt)
